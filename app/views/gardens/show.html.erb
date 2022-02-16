@@ -3,3 +3,24 @@
     <h1><%= @garden.name %></h1>
   </div>
 </div>
+
+<div class="container">
+  <h4>Add Plant:</h4>
+  <%= simple_form_for [@garden, @plant] do |f| %>
+    <%= f.input :name, label: false, placeholder: "Nombre de la planta" %>
+    <%= f.input :image_url, label: false, placeholder: "https://www.plantita.com/1.jpg" %>
+    <%= f.submit "Add plant", class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+<div class="container mt-5">
+  <div class="cards">
+    <% @garden.plants.each do |plant| %>
+      <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= plant.image_url %>')">
+        <%= plant.name %>
+        <%= link_to "Eliminar", plant_path(plant), method: :delete, data: { confirm: "Pensá en la ecología" }  %>
+      </div>
+    <% end %>
+  </div>
+
+</div>
